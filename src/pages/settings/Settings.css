@@ -1,0 +1,16 @@
+.settings{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.settings__inner{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 10%;
+}
+
+.settings__inner > * {
+    margin-bottom: 10px;
+}
