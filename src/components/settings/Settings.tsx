@@ -1,8 +1,16 @@
 import { Link } from 'react-router-dom';
 import './Settings.css';
-import { SettingsProps } from '../../types/types';
+import { Operator, SettingsProps } from '../../types/types';
 
-const Settings: React.FunctionComponent<SettingsProps> = () => {
+const DEFAULT_OPERATORS: Operator[] = [
+    {symbol: '+', precedence: 1},
+    {symbol: '-', precedence: 1},
+    {symbol: '*', precedence: 2},
+    {symbol: '/', precedence: 2},
+]
+
+
+const Settings: React.FunctionComponent = () => {
     return (
         <section className="settings">
 
@@ -15,7 +23,17 @@ const Settings: React.FunctionComponent<SettingsProps> = () => {
             <div className="settings__inner">
                 <h1 className="settings__inner-title">Настройки</h1>
                 <div className="settings__inner-chars">
-
+                    <h2>Допустимые знаки</h2>
+                    {DEFAULT_OPERATORS.map(operator => (
+                        <label key={operator.symbol}>
+                            <input 
+                                type="checkbox"
+                                value={operator.symbol}     
+                            />
+                            {operator.symbol}
+                        </label>
+                    ))
+                    }
                 </div>
                 <label htmlFor="input">
                     Минимальное число
