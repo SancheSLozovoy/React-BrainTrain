@@ -7,10 +7,16 @@
 .settings__inner{
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     width: 10%;
 }
 
 .settings__inner > * {
     margin-bottom: 10px;
+}
+
+label{
+    display: flex;
+    flex-direction: column;
 }
