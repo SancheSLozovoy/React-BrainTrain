@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import './Settings.css';
+import { SettingsProps } from '../../types/types';
 
-const Settings: React.FunctionComponent = () => {
+const Settings: React.FunctionComponent<SettingsProps> = () => {
     return (
         <section className="settings">
 
