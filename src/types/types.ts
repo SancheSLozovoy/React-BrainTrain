@@ -29,9 +29,14 @@ export interface GameExample {
 }
 
 export interface UserInput {
-    answers: number[]; 
+    answers: (number | '')[]; 
 }
 
 export interface HeaderProps {
     gameId: number;
+}
+
+export interface GameStatistic {
+    date: string; 
+    correctAnswers: number; 
 }

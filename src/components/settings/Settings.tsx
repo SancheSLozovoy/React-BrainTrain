@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import './Settings.css';
 import { Operator, SettingsProps } from '../../types/types';
 import { useState } from 'react';
+import { Input } from 'antd';
 
 const DEFAULT_OPERATORS: Operator[] = [
     { symbol: '+', precedence: 1 },
@@ -20,7 +21,7 @@ const Settings: React.FunctionComponent = () => {
 
     const handleChangeOperators = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value, checked } = e.target;
-        
+
         const operator = DEFAULT_OPERATORS.find(op => op.symbol === value);
 
         if (checked && operator) {
@@ -73,40 +74,42 @@ const Settings: React.FunctionComponent = () => {
                 </div>
                 <label htmlFor="input">
                     Минимальное число
-                    <input
-                        defaultValue={minNumber}
-                        type="number"
+                    <Input
+                        min={minNumber}
+                        max={maxNumber - 1}
+                        defaultValue={1}
                         onChange={(e) => setMinNumber(Number(e.target.value))}
                     >
-                    </input>
+                    </Input>
                 </label>
                 <label htmlFor="input">
                     Максимальное число
-                    <input
-                        defaultValue={maxNumber} 
-                        type="number"
+                    <Input
+                        min={minNumber + 1}
+                        max={maxNumber}
+                        defaultValue={100}
                         onChange={(e) => setMaxNumber(Number(e.target.value))}
                     >
-                    </input>
+                    </Input>
                 </label>
                 <label htmlFor="input">
                     Сложность
-                    <input 
-                        defaultValue={complexity} 
-                        type="number"
+                    <Input
+                        min={1}
+                        max={10}
+                        defaultValue={1}
                         onChange={(e) => setComplexity(Number(e.target.value))}
-                        min={2}
                     >
-                    </input>
+                    </Input>
                 </label>
                 <label htmlFor="input">
                     Время
-                    <input 
-                        defaultValue={time} 
-                        type="number"
+                    <Input
+                        min={15}
+                        defaultValue={60}
                         onChange={(e) => setTime(Number(e.target.value))}
                     >
-                    </input>
+                    </Input>
                 </label>
                 <Link to="/game">
                     <button onClick={handleStart} className="settings__inner-button">Начать игру</button>

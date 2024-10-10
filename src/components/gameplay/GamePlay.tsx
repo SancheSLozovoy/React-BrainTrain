@@ -17,11 +17,14 @@ const GamePlay: React.FC = () => {
         }
     }, []);
 
+    
+
     return (
     <div>
         <section className="game">
             {gameId !== null && <Header gameId={gameId} />}
             <div className="game__content">
+                <button>Проверить</button>
             </div>
         </section>
     </div>);
