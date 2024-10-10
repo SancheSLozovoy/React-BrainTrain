@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Settings from './pages/settings/Settings';
+import Settings from './pages/settings/SettingsPage';
 import Game from './pages/game/Game';
  
 const App: React.FunctionComponent = () => {
