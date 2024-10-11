@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import './Settings.css';
 import { Operator, SettingsProps } from '../../types/types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Input } from 'antd';
 
 const DEFAULT_OPERATORS: Operator[] = [
@@ -18,6 +18,18 @@ const Settings: React.FunctionComponent = () => {
     const [maxNumber, setMaxNumber] = useState<number>(100);
     const [complexity, setComplexity] = useState<number>(1);
     const [time, setTime] = useState<number>(60);
+    const [gameStat, setGameStat] = useState<number | null>(null);
+    const [gameId, setGameId] = useState<number | null>(null);
+
+    useEffect(() => {
+        const statistic = localStorage.getItem('gameResult');
+        const gameId = localStorage.getItem('gameId');
+        if (statistic === null || gameId === null) {
+            return;
+        }
+        setGameId(JSON.parse(gameId));
+        setGameStat(JSON.parse(statistic))
+    })
 
     const handleChangeOperators = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value, checked } = e.target;
@@ -52,7 +64,7 @@ const Settings: React.FunctionComponent = () => {
             <div className="statistic__container">
                 <h1 className="statistic__container-title">Статистика</h1>
                 <span className="statistic__container-date"></span>
-                <span className="statistic__container-score"></span>
+                <span className="statistic__container-score">{`Результат игры №${gameId}: ${gameStat}`}</span>
             </div>
 
             <div className="settings__inner">

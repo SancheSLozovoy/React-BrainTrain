@@ -1,9 +1,9 @@
+import { useState, useEffect } from "react";
 import Progressbar from "../progressbar/Progressbar";
 import { Link } from 'react-router-dom';
 import './Header.css'
 import { HeaderProps } from "../../types/types";
 import { SettingsProps } from "../../types/types";
-import { useState, useEffect } from "react";
 
 const Header: React.FC<HeaderProps> = ({ gameId, onTimeOver }) => {
     const [time, setTime] = useState<number | null>(null);

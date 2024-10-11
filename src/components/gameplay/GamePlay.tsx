@@ -11,16 +11,19 @@ const GamePlay: React.FC = () => {
     const [userInput, setUserInput] = useState<string[]>([]);
     const [feedBack, setFeedBack] = useState<string | null>(null);
     const [isGameOver, setIsGameOver] = useState<boolean>(false);
+    const [gameResult, setGameResult] = useState<number>(1);
 
     useEffect(() => {
-        const storedGameId = localStorage.getItem('gameId');
-        if (storedGameId && !isNaN(Number(storedGameId))) {
-            setGameId(Number(storedGameId));
-        } else {
-            const newGameId = 1;
+        const createNewGameId = () => {
+            const storedGameId = localStorage.getItem('gameId');
+            const newGameId = storedGameId ? Number(storedGameId) + 1 : 1;
             localStorage.setItem('gameId', newGameId.toString());
-            setGameId(newGameId);
+            return newGameId;
         }
+
+        const newGameId = createNewGameId();
+        setGameId(newGameId);
+        setGameResult(1); 
 
         const example = generateSolvableExample();
         if (example) {
@@ -57,6 +60,8 @@ const GamePlay: React.FC = () => {
         try {
             const result = evaluateExpression(userValues, gameExample.operators);
             if (result === gameExample.target) {
+                setGameResult(gameResult+1)
+                localStorage.setItem('gameResult' , JSON.stringify(gameResult))
                 let alternativeSolution = `${gameExample.operands[0]}`;
 
                 for (let i = 0; i < gameExample.operators.length; i++) {
