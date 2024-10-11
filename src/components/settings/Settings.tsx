@@ -16,7 +16,7 @@ const Settings: React.FunctionComponent = () => {
     const [allowedOperators, setAllowedOperators] = useState<Operator[]>(DEFAULT_OPERATORS)
     const [minNumber, setMinNumber] = useState<number>(10);
     const [maxNumber, setMaxNumber] = useState<number>(100);
-    const [complexity, setComplexity] = useState<number>(3);
+    const [complexity, setComplexity] = useState<number>(1);
     const [time, setTime] = useState<number>(60);
 
     const handleChangeOperators = (e: React.ChangeEvent<HTMLInputElement>) => {
