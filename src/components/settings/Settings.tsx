@@ -85,7 +85,7 @@ const Settings: React.FunctionComponent = () => {
                     }
                 </div>
                 <label htmlFor="input">
-                    Минимальное число
+                    Минимальное число операнда
                     <Input
                         min={minNumber}
                         max={maxNumber - 1}
@@ -95,7 +95,7 @@ const Settings: React.FunctionComponent = () => {
                     </Input>
                 </label>
                 <label htmlFor="input">
-                    Максимальное число
+                    Максимальное число операнда
                     <Input
                         min={minNumber + 1}
                         max={maxNumber}

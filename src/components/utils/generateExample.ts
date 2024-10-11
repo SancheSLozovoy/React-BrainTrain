@@ -81,9 +81,7 @@ export const generateSolvableExample = () => {
             const result = evaluateExpression(operands, operators);
             console.log(result)
             if (
-                Number.isInteger(result) &&
-                result >= minNumber &&
-                result <= maxNumber
+                Number.isInteger(result)
             ) {
                 return {
                     operands,
