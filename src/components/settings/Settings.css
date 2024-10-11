@@ -61,11 +61,11 @@
 }
 
 label{
-     display: flex;
-     margin-bottom: 10px;
+    display: block;
+    margin-bottom: 15px;
 }
 
-label input {
-    margin-right: 5px;
-    margin-left: 10px;
+span{
+    display: flex;
+    margin-bottom: 20px;
 }

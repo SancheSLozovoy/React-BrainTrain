@@ -84,7 +84,7 @@ const Settings: React.FunctionComponent = () => {
                 <div className="settings__inner-chars">
                     <h2>Допустимые знаки</h2>
                     {DEFAULT_OPERATORS.map(operator => (
-                        <label key={operator.symbol}>
+                        <span key={operator.symbol}>
                             <input
                                 type="checkbox"
                                 value={operator.symbol}
@@ -92,7 +92,7 @@ const Settings: React.FunctionComponent = () => {
                                 onChange={handleChangeOperators}
                             />
                             {operator.symbol}
-                        </label>
+                        </span>
                     ))
                     }
                 </div>
