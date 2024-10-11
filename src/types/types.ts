@@ -34,6 +34,7 @@ export interface UserInput {
 
 export interface HeaderProps {
     gameId: number;
+    onTimeOver: () => void;
 }
 
 export interface GameStatistic {
