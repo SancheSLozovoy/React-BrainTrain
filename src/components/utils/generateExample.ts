@@ -73,11 +73,13 @@ export const generateSolvableExample = () => {
         for (let i = 0; i < numberOfOperands; i++) {
             const operand = Math.floor(Math.random() * (maxNumber - minNumber + 1)) + minNumber;
             operands.push(operand);
+            
         }
+        console.log(operands);
 
         try {
             const result = evaluateExpression(operands, operators);
-
+            console.log(result)
             if (
                 Number.isInteger(result) &&
                 result >= minNumber &&

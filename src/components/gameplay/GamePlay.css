@@ -43,3 +43,17 @@
 .feedback.error {
     color: red;
 }
+
+.expression{
+    display: flex;
+    align-items: center;
+}
+
+.example__container{
+    display: flex;
+}
+
+.example__container > * {
+    margin-right: 15px;
+    align-items: center;
+}

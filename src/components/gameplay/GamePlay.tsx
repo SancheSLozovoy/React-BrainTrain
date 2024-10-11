@@ -4,6 +4,7 @@ import { GameExample } from "../../types/types";
 import { generateSolvableExample } from "../utils/generateExample";
 import { evaluateExpression } from "../utils/generateExample";
 import './GamePlay.css'
+import { Input } from "antd";
 
 const GamePlay: React.FC = () => {
     const [gameId, setGameId] = useState<number | null>(null);
@@ -11,7 +12,7 @@ const GamePlay: React.FC = () => {
     const [userInput, setUserInput] = useState<string[]>([]);
     const [feedBack, setFeedBack] = useState<string | null>(null);
     const [isGameOver, setIsGameOver] = useState<boolean>(false);
-    const [gameResult, setGameResult] = useState<number>(0); 
+    const [gameResult, setGameResult] = useState<number>(0);
 
     useEffect(() => {
         const createNewGameId = () => {
@@ -63,7 +64,7 @@ const GamePlay: React.FC = () => {
             if (result === gameExample.target) {
                 const newGameResult = gameResult + 1;
                 setGameResult(newGameResult);
-                localStorage.setItem('gameResult', newGameResult.toString()); 
+                localStorage.setItem('gameResult', newGameResult.toString());
 
                 let alternativeSolution = `${gameExample.operands[0]}`;
                 for (let i = 0; i < gameExample.operators.length; i++) {
@@ -109,13 +110,13 @@ const GamePlay: React.FC = () => {
                                 <div className="example">
                                     <div className="expression">
                                         {gameExample.operands.map((_, index) => (
-                                            <span key={index}>
-                                                <input
+                                            <span className="example__container" key={index}>
+                                                <Input
                                                     type="number"
                                                     value={userInput[index]}
                                                     onChange={(e) => handleInputChange(index, e.target.value)}
-                                                    className="operand-input"
-                                                />
+                                                    className="operand-input">
+                                                </Input>
                                                 {index < gameExample.operators.length && (
                                                     <span className="operator"> {gameExample.operators[index].symbol} </span>
                                                 )}
