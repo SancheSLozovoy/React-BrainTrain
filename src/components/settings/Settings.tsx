@@ -24,6 +24,17 @@ const Settings: React.FunctionComponent = () => {
     useEffect(() => {
         const statistic = localStorage.getItem('gameResult');
         const gameId = localStorage.getItem('gameId');
+        const currSettings = localStorage.getItem('gameSettings');
+
+        if (currSettings) {
+            const settingsProps: SettingsProps = JSON.parse(currSettings);
+            setAllowedOperators(settingsProps.allowedOperators);
+            setComplexity(settingsProps.complexity);
+            setMaxNumber(settingsProps.maxNumber);
+            setMinNumber(settingsProps.minNumber);
+            setTime(settingsProps.timeLimit);
+        }
+
         if (statistic === null || gameId === null) {
             return;
         }
@@ -87,9 +98,9 @@ const Settings: React.FunctionComponent = () => {
                 <label htmlFor="input">
                     Минимальное число операнда
                     <Input
-                        min={minNumber}
+                        type='number'
                         max={maxNumber - 1}
-                        defaultValue={10}
+                        value={minNumber}
                         onChange={(e) => setMinNumber(Number(e.target.value))}
                     >
                     </Input>
@@ -97,9 +108,9 @@ const Settings: React.FunctionComponent = () => {
                 <label htmlFor="input">
                     Максимальное число операнда
                     <Input
+                        type='number'
                         min={minNumber + 1}
-                        max={maxNumber}
-                        defaultValue={100}
+                        value={maxNumber}
                         onChange={(e) => setMaxNumber(Number(e.target.value))}
                     >
                     </Input>
@@ -107,9 +118,9 @@ const Settings: React.FunctionComponent = () => {
                 <label htmlFor="input">
                     Сложность
                     <Input
+                        type='number'
                         min={1}
-                        max={10}
-                        defaultValue={1}
+                        value={complexity}
                         onChange={(e) => setComplexity(Number(e.target.value))}
                     >
                     </Input>
@@ -117,8 +128,9 @@ const Settings: React.FunctionComponent = () => {
                 <label htmlFor="input">
                     Время
                     <Input
+                        type='number'
                         min={15}
-                        defaultValue={60}
+                        value={time}
                         onChange={(e) => setTime(Number(e.target.value))}
                     >
                     </Input>
