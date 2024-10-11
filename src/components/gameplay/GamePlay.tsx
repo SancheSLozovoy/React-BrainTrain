@@ -6,6 +6,7 @@ import { generateSolvableExample } from "../utils/generateExample";
 import { evaluateExpression } from "../utils/generateExample";
 import './GamePlay.css';
 import { Input } from "antd";
+import { Button } from 'antd';
 
 const GamePlay: React.FC = () => {
     const [gameId, setGameId] = useState<number | null>(null);
@@ -137,9 +138,9 @@ const GamePlay: React.FC = () => {
                         <div className="game-over">
                             <h2>{feedBack}</h2>
                             <div className="game__over-container">
-                                <button className="start-button" onClick={() => window.location.reload()}>Начать заново</button>
+                                <Button type='primary' onClick={() => window.location.reload()}>Начать заново</Button>
                                 <Link to={"/"}>
-                                    <button className="back-button">Вернуться в меню</button>
+                                    <Button>Вренуться в меню</Button>
                                 </Link>
                             </div>
                         </div>
