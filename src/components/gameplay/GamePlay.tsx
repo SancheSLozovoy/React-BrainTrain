@@ -3,6 +3,7 @@ import Header from "../../components/header/Header";
 import { GameExample } from "../../types/types";
 import { generateSolvableExample } from "../utils/generateExample";
 import { evaluateExpression } from "../utils/generateExample";
+import './GamePlay.css'
 
 const GamePlay: React.FC = () => {
 
