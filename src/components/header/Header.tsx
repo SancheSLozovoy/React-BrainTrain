@@ -6,14 +6,14 @@ import { HeaderProps } from "../../types/types";
 import { SettingsProps } from "../../types/types";
 
 const Header: React.FC<HeaderProps> = ({ gameId, onTimeOver }) => {
-    const [time, setTime] = useState<number | null>(null);
+    const [time, setTime] = useState<number>(0);
 
     const getTime = () => {
         const storeSetting = localStorage.getItem('gameSettings');
-        
+
         if (!storeSetting) {
             console.error('Настройки не найдены');
-            return null;
+            return 60;
         }
 
         const settings: SettingsProps = JSON.parse(storeSetting);
@@ -24,28 +24,27 @@ const Header: React.FC<HeaderProps> = ({ gameId, onTimeOver }) => {
 
     useEffect(() => {
         const initialTime = getTime();
-        if (initialTime) {
-            setTime(initialTime);
+        setTime(initialTime);
 
-            const timer = setInterval(() => {
-                setTime(prev => {
-                    if (prev !== null && prev > 0) {
-                        return prev - 1;
-                    } else {
-                        clearInterval(timer);
-                        onTimeOver(); 
-                        return 0;
-                    }
-                });
-            }, 1000);
+        const timer = setInterval(() => {
+            setTime(prev => {
+                if (prev > 0) {
+                    return prev - 1;
+                } else {
+                    clearInterval(timer);
+                    onTimeOver();
+                    return 0;
+                }
+            });
+        }, 1000);
 
-            return () => clearInterval(timer);
-        }
+        return () => clearInterval(timer);
+
     }, [onTimeOver]);
 
     return (
         <header className="header">
-            {time !== null && <Progressbar progress={time}></Progressbar>}
+            <Progressbar progress={time}></Progressbar>
             <div className="game__content-number">Game ID: {gameId}</div>
             <Link to="/">
                 <button className="game__content-button">Back</button>

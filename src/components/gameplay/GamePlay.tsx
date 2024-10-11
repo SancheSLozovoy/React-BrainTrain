@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect, useCallback } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "../../components/header/Header";
 import { GameExample } from "../../types/types";
 import { generateSolvableExample } from "../utils/generateExample";
@@ -16,6 +16,11 @@ const GamePlay: React.FC = () => {
     const [gameResult, setGameResult] = useState<number>(0);
 
     const navigate = useNavigate(); 
+
+    const handleTimeOver = useCallback(() => {
+        setIsGameOver(true);
+        setFeedBack("Время вышло! Игра окончена.");
+    }, []);
 
     useEffect(() => {
         const createNewGameId = () => {
@@ -68,7 +73,7 @@ const GamePlay: React.FC = () => {
             if (result === gameExample.target) {
                 const newGameResult = gameResult + 1;
                 setGameResult(newGameResult);
-                localStorage.setItem('gameResult', newGameResult.toString());
+                localStorage.setItem('gameResult', newGameResult.toString()); 
 
                 let alternativeSolution = `${gameExample.operands[0]}`;
                 for (let i = 0; i < gameExample.operators.length; i++) {
@@ -80,7 +85,7 @@ const GamePlay: React.FC = () => {
                 const nextExample = generateSolvableExample();
                 if (nextExample) {
                     setGameExample(nextExample);
-                    setUserInput(userInput.map(input => input = ''));
+                    setUserInput(Array(nextExample.operands.length).fill(''));
                     localStorage.setItem('currentExample', JSON.stringify(nextExample));
                 }
             } else {
@@ -89,11 +94,6 @@ const GamePlay: React.FC = () => {
         } catch (e) {
             console.error(e);
         }
-    }
-
-    const handleTimeOver = () => {
-        setIsGameOver(true);
-        setFeedBack("Время вышло! Игра окончена.");
     }
 
     return (
@@ -136,7 +136,12 @@ const GamePlay: React.FC = () => {
                     ) : (
                         <div className="game-over">
                             <h2>{feedBack}</h2>
-                            <button onClick={() => window.location.reload()}>Начать заново</button>
+                            <div className="game__over-container">
+                                <button className="start-button" onClick={() => window.location.reload()}>Начать заново</button>
+                                <Link to={"/"}>
+                                    <button className="back-button">Вернуться в меню</button>
+                                </Link>
+                            </div>
                         </div>
                     )}
                 </div>

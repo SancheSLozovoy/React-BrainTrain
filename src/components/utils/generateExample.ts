@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { Operator, SettingsProps } from "../../types/types";
 
 const MAX_ATTEMP = 100;
