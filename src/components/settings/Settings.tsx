@@ -77,7 +77,7 @@ const Settings: React.FunctionComponent = () => {
                     <Input
                         min={minNumber}
                         max={maxNumber - 1}
-                        defaultValue={1}
+                        defaultValue={10}
                         onChange={(e) => setMinNumber(Number(e.target.value))}
                     >
                     </Input>
