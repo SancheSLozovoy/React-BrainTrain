@@ -14,13 +14,14 @@ const GamePlay: React.FC = () => {
 
     useEffect(() => {
         const storedGameId = localStorage.getItem('gameId');
+        let newGameId = 1; 
+
         if (storedGameId && !isNaN(Number(storedGameId))) {
-            setGameId(Number(storedGameId));
-        } else {
-            const newGameId = 1;
-            localStorage.setItem('gameId', newGameId.toString());
-            setGameId(newGameId);
+            newGameId = Number(storedGameId) + 1; 
         }
+
+        setGameId(newGameId);
+        localStorage.setItem('gameId', newGameId.toString());
 
         const example = generateSolvableExample();
         if (example) {
