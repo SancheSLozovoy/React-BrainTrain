@@ -11,7 +11,7 @@ const GamePlay: React.FC = () => {
     const [userInput, setUserInput] = useState<string[]>([]);
     const [feedBack, setFeedBack] = useState<string | null>(null);
     const [isGameOver, setIsGameOver] = useState<boolean>(false);
-    const [gameResult, setGameResult] = useState<number>(1);
+    const [gameResult, setGameResult] = useState<number>(0); 
 
     useEffect(() => {
         const createNewGameId = () => {
@@ -21,12 +21,11 @@ const GamePlay: React.FC = () => {
             return newGameId;
         };
 
-        const storedGameResult = localStorage.getItem('gameResult');
-        const newGameResult = storedGameResult ? 0 : Number(storedGameResult); 
+        setGameResult(0);
+        localStorage.setItem('gameResult', '0');
 
         const newGameId = createNewGameId();
         setGameId(newGameId);
-        setGameResult(newGameResult)
 
         const example = generateSolvableExample();
         if (example) {
