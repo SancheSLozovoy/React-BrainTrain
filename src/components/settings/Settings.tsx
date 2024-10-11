@@ -36,6 +36,7 @@ const Settings: React.FunctionComponent = () => {
         }
 
         if (statistic === null || gameId === null) {
+            setGameId(0);
             return;
         }
         setGameId(JSON.parse(gameId));
