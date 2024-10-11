@@ -29,7 +29,7 @@ const Settings: React.FunctionComponent = () => {
         }
         setGameId(JSON.parse(gameId));
         setGameStat(JSON.parse(statistic))
-    })
+    }, [])
 
     const handleChangeOperators = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value, checked } = e.target;

@@ -1,4 +1,4 @@
-import { Operator, SettingsProps } from "../../types/types"
+import { Operator, SettingsProps } from "../../types/types";
 
 const MAX_ATTEMP = 100;
 
@@ -16,7 +16,7 @@ export const evaluateExpression = (operands: number[], operators: Operator[]): n
                 result = leftOper * rightOper;
             } else {
                 if (rightOper === 0) {
-                    throw new Error("Деление на ноль")
+                    throw new Error("Деление на ноль");
                 }
                 result = leftOper / rightOper;
             }
@@ -26,8 +26,6 @@ export const evaluateExpression = (operands: number[], operators: Operator[]): n
             currOperators.splice(i, 1);
             i--;
         }
-
-
     }
 
     let finalResult = currOperands[0];
@@ -63,13 +61,16 @@ export const generateSolvableExample = () => {
     for (let att = 0; att < MAX_ATTEMP; att++) {
         const operators: Operator[] = [];
 
-        for (let i = 0; i < complexity; i++) {
+        const numberOfOperators = complexity > 0 ? complexity : 1; 
+        const numberOfOperands = numberOfOperators + 1; 
+
+        for (let i = 0; i < numberOfOperators; i++) {
             const randomOp = allowedOperators[Math.floor(Math.random() * allowedOperators.length)];
             operators.push(randomOp);
         }
 
         const operands: number[] = [];
-        for (let i = 0; i < complexity + 1; i++) { 
+        for (let i = 0; i < numberOfOperands; i++) {
             const operand = Math.floor(Math.random() * (maxNumber - minNumber + 1)) + minNumber;
             operands.push(operand);
         }
@@ -97,4 +98,3 @@ export const generateSolvableExample = () => {
     console.error("Не удалось сгенерировать пример");
     return null;
 }
-
