@@ -19,11 +19,14 @@ const GamePlay: React.FC = () => {
             const newGameId = storedGameId ? Number(storedGameId) + 1 : 1;
             localStorage.setItem('gameId', newGameId.toString());
             return newGameId;
-        }
+        };
+
+        const storedGameResult = localStorage.getItem('gameResult');
+        const newGameResult = storedGameResult ? 0 : Number(storedGameResult); 
 
         const newGameId = createNewGameId();
         setGameId(newGameId);
-        setGameResult(1); 
+        setGameResult(newGameResult)
 
         const example = generateSolvableExample();
         if (example) {
@@ -33,7 +36,6 @@ const GamePlay: React.FC = () => {
         } else {
             alert("Не удалось сгенерировать пример. Попробуйте изменить настройки.");
         }
-
     }, []);
 
     const handleInputChange = (index: number, value: string) => {
@@ -60,10 +62,11 @@ const GamePlay: React.FC = () => {
         try {
             const result = evaluateExpression(userValues, gameExample.operators);
             if (result === gameExample.target) {
-                setGameResult(gameResult+1)
-                localStorage.setItem('gameResult' , JSON.stringify(gameResult))
-                let alternativeSolution = `${gameExample.operands[0]}`;
+                const newGameResult = gameResult + 1;
+                setGameResult(newGameResult);
+                localStorage.setItem('gameResult', newGameResult.toString()); 
 
+                let alternativeSolution = `${gameExample.operands[0]}`;
                 for (let i = 0; i < gameExample.operators.length; i++) {
                     alternativeSolution += ` ${gameExample.operators[i].symbol} ${gameExample.operands[i + 1]}`;
                 }
@@ -71,7 +74,6 @@ const GamePlay: React.FC = () => {
                 setFeedBack(`Правильно! Еще можно было вот так: ${alternativeSolution}`);
 
                 const nextExample = generateSolvableExample();
-
                 if (nextExample) {
                     setGameExample(nextExample);
                     setUserInput(userInput.map(input => input = ''));
@@ -137,6 +139,6 @@ const GamePlay: React.FC = () => {
             </section>
         </div>
     );
-}
+};
 
 export default GamePlay;
