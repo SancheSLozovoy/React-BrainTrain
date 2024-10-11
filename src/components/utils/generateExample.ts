@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Operator, SettingsProps } from "../../types/types";
 
 const MAX_ATTEMP = 100;
@@ -9,13 +10,14 @@ export const evaluateExpression = (operands: number[], operators: Operator[]): n
     for (let i = 0; i < currOperators.length; i++) {
         if (currOperators[i].symbol === '*' || currOperators[i].symbol === '/') {
             const leftOper = currOperands[i];
-            const rightOper = currOperands[i + 1];
+            let rightOper = currOperands[i + 1];
             let result: number;
 
             if (currOperators[i].symbol === '*') {
                 result = leftOper * rightOper;
             } else {
                 if (rightOper === 0) {
+                    rightOper = 1
                     throw new Error("Деление на ноль");
                 }
                 result = leftOper / rightOper;
@@ -95,6 +97,5 @@ export const generateSolvableExample = () => {
         }
     }
 
-    console.error("Не удалось сгенерировать пример");
     return null;
 }

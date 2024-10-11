@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "../../components/header/Header";
 import { GameExample } from "../../types/types";
 import { generateSolvableExample } from "../utils/generateExample";
 import { evaluateExpression } from "../utils/generateExample";
-import './GamePlay.css'
+import './GamePlay.css';
 import { Input } from "antd";
 
 const GamePlay: React.FC = () => {
@@ -14,6 +15,8 @@ const GamePlay: React.FC = () => {
     const [isGameOver, setIsGameOver] = useState<boolean>(false);
     const [gameResult, setGameResult] = useState<number>(0);
 
+    const navigate = useNavigate(); 
+
     useEffect(() => {
         const createNewGameId = () => {
             const storedGameId = localStorage.getItem('gameId');
@@ -21,13 +24,13 @@ const GamePlay: React.FC = () => {
             localStorage.setItem('gameId', newGameId.toString());
             return newGameId;
         };
-
+    
         setGameResult(0);
         localStorage.setItem('gameResult', '0');
-
+    
         const newGameId = createNewGameId();
         setGameId(newGameId);
-
+    
         const example = generateSolvableExample();
         if (example) {
             setGameExample(example);
@@ -35,8 +38,9 @@ const GamePlay: React.FC = () => {
             setUserInput(Array(example.operands.length).fill(''));
         } else {
             alert("Не удалось сгенерировать пример. Попробуйте изменить настройки.");
+            navigate("/"); 
         }
-    }, []);
+    }, [navigate]);
 
     const handleInputChange = (index: number, value: string) => {
         const updatedInput = [...userInput];
